@@ -1,7 +1,7 @@
 # LS-MCPP
 This repository is the implementation of the boundary editing operators and the local search framework for the graph-based multi-robot coverage path planning problem from the following paper:
 
-*Jingtao Tang and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning via Local Search." AAAI 2024. [[paper]](https://arxiv.org/pdf/2312.10797.pdf), [[simulation]](https://vimeo.com/894744842)*
+*Jingtao Tang and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning via Local Search." AAAI 2024. [[paper]](https://arxiv.org/pdf/2312.10797.pdf), [[simulation]](https://vimeo.com/894744842)*, [[project]](https://reso1.github.io/blog/posts/grid_mcpp)
 
 Please cite this paper if you use this code for the multi-robot coverage path planning problem.
 
