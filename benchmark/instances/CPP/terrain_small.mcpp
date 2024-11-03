@@ -1,0 +1,5 @@
+map: terrain_small
+root: [[10, 12]]
+weighted: True
+weight_seed: 0
+incomplete: False

@@ -1,9 +1,13 @@
 from functools import wraps
+import os
 import time
+import pickle
+from decimal import Decimal
 from collections import defaultdict
 
 import numpy as np
 import networkx as nx
+import matplotlib.pyplot as plt
 
 
 def timeit(func):
@@ -133,3 +137,22 @@ class DuplicationRec:
             self.cnts[v] -= 1
             if self.cnts[v] <= 1:
                 self.dup_set.remove(v)
+
+
+class Tracer:
+    @staticmethod
+    def load_tracer(s):
+        with open(os.path.join("data", "runrecords", s), 'rb') as f:
+            return pickle.load(f)
+
+    @staticmethod
+    def plt_param(ticks):
+        plt.yticks(fontsize=8)
+        labels = []
+        for v in ticks:
+            if v == 0:
+                labels.append('0')
+            else:
+                labels.append('%.1E' % Decimal(v))
+        plt.xticks(ticks, labels, fontsize=8)
+

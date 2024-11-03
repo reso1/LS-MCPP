@@ -1,0 +1,4 @@
+map: floor_small
+root: [[9, 19]]
+weighted: False
+incomplete: False

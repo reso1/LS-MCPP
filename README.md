@@ -1,9 +1,11 @@
 # LS-MCPP
-This repository is the implementation of the boundary editing operators and the local search framework for the graph-based multi-robot coverage path planning problem from the following paper:
+This repository is the benchmark and implementation of the algorithms for the graph-based multi-robot coverage path planning problem from the following two papers:
 
-*Jingtao Tang and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning via Local Search." AAAI 2024. [[paper]](https://arxiv.org/pdf/2312.10797.pdf), [[simulation]](https://vimeo.com/894744842)*, [[project]](https://reso1.github.io/blog/posts/grid_mcpp)
+- Branch master: *Jingtao Tang, Zining Mao, and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning on Grids with Path Deconfliction." [[paper]](https://arxiv.org), [[project]](https://sites.google.com/view/lsmcpp)
 
-Please cite this paper if you use this code for the multi-robot coverage path planning problem.
+- Branch aaai24: *Jingtao Tang and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning via Local Search." AAAI 2024. [[paper]](https://arxiv.org/pdf/2312.10797.pdf), [[simulation]](https://vimeo.com/894744842)*, [[project]](https://reso1.github.io/blog/posts/grid_mcpp)
+
+Please cite us if you use this code for the multi-robot coverage path planning problem.
 
 ## Installation
 `pip install -r requirements.txt`
@@ -29,14 +31,18 @@ python main.py [-h] [--init_sol_type INIT_SOL_TYPE] [--prio_type PRIO_TYPE] [--M
   - `--random_remove RANDOM_REMOVE`: Is randomly making 20 percentage of terrain vertices incomplete
 
 ## File Structure
-- main.py: LS-MCPP main function
-- exp_plot.py: functions related to experiments in the paper
-- record_simulation.py: recorder for MCPP simulation
-- MIP-MCPP: repo of the work "*Mixed Integer Programming for Time-Optimal Multi-Robot Coverage Path Planning With Efficient Heuristics*"
-- data/
-  - instances: the three very large-scale MCPP instances adopted from MAPF benchmark
-  - MIP_solutions: MMRTC MIP solutions for the MCPP instances
-  - runrecords: running results of the experiements in the paper
+- benchmark/
+  - gridmaps: the 2d grid maps (partly from https://movingai.com/benchmarks/grids.html)
+  - instances: the MCPP instances with roots and weights specified
+  - instance.py: the class of MCPP instance
+  - plans.py: the class of plan (trajectories) for the robots
+  - simulation.py: a simple visualizer for MCPP execution animation
+- conflict_solver/ 
+  - high_level_planner.py: the high-level planner of priority-based search
+  - low_level_planner.py: the chaining, holistic (multi-label), and adaptive approaches for the low-level planner
+  - reservation_table.py: the reservation table of time intervals (for safe-interval path planning)
+  - states.py: state representations for the low-level planner
+- data[optinal]: the accompanying simulation exp results for the paper ([download link](https://drive.google.com/file/d/1P4infbS0uEnRhemXQyvgKJvTucT-lO92/view?usp=drive_link)).
 - LS_MCPP/
   - estc.py: the Extended STC algorithm
   - graph.py: class of the decomposed graph
@@ -45,7 +51,9 @@ python main.py [-h] [--init_sol_type INIT_SOL_TYPE] [--prio_type PRIO_TYPE] [--M
   - pool.py: class of operator pool
   - solution.py: class of the MCPP solution
   - utils.py: other ultility functions
-
+- MIP-MCPP: repo of the work "*[Mixed Integer Programming for Time-Optimal Multi-Robot Coverage Path Planning With Efficient Heuristics](https://arxiv.org/pdf/2306.17609)*"
+- exp_runner.py: the experiment runner
+- plot.py: plot functions for the experiments
 
 ## License
 LS-MCPP is released under the GPL version 3. See LICENSE.txt for further details.
