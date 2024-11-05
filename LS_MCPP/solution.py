@@ -396,7 +396,7 @@ def MIP_solve(mcpp:MCPP, rmv_ratios, seeds):
         for i, mutant in enumerate(mcpp.randomized_mutants([rmv_ratio], seeds)):
             if not os.path.exists(os.path.join(save_dir, f"{rmv_ratio:.3f}-{seeds[i]}.solu")):
                 dg = contract(mutant._G_legacy)
-                R = set([dg.undecomp(mcpp.legacy_vertex(r)) for r in mcpp.R])
+                R = set([dg.undecomp(mcpp.legacy_vertex(r)) for r in mutant.R])
                 istc_graph, istc_R, pos2v = nx.Graph(), [], {}
                 for vid, v in enumerate(dg.T):
                     istc_graph.add_node(vid, pos=v)

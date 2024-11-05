@@ -1,7 +1,7 @@
 # LS-MCPP
 This repository is the benchmark and implementation of the algorithms for the graph-based multi-robot coverage path planning problem from the following two papers:
 
-- Branch master: *Jingtao Tang, Zining Mao, and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning on Grids with Path Deconfliction." [[paper]](https://arxiv.org), [[project]](https://sites.google.com/view/lsmcpp)
+- Branch master: *Jingtao Tang, Zining Mao, and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning on Grids with Path Deconfliction." [[paper]](https://arxiv.org/abs/2411.01707), [[project]](https://sites.google.com/view/lsmcpp)
 
 - Branch aaai24: *Jingtao Tang and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning via Local Search." AAAI 2024. [[paper]](https://arxiv.org/pdf/2312.10797.pdf), [[simulation]](https://vimeo.com/894744842)*, [[project]](https://reso1.github.io/blog/posts/grid_mcpp)
 
@@ -52,6 +52,7 @@ python main.py [-h] [--init_sol_type INIT_SOL_TYPE] [--prio_type PRIO_TYPE] [--M
   - solution.py: class of the MCPP solution
   - utils.py: other ultility functions
 - MIP-MCPP: repo of the work "*[Mixed Integer Programming for Time-Optimal Multi-Robot Coverage Path Planning With Efficient Heuristics](https://arxiv.org/pdf/2306.17609)*"
+- demo.ipynb: a demo code for a small MCPP instance
 - exp_runner.py: the experiment runner
 - plot.py: plot functions for the experiments
 

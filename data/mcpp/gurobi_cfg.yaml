@@ -1,0 +1,4 @@
+Threads: 16
+TimeLimit: 3600
+OptimalityTol: 1e-3
+SoftMemLimit: 32
