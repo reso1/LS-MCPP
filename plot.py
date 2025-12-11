@@ -2,22 +2,23 @@ import os
 import pickle
 import numpy as np
 
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.colors import rgb2hex
-from pathlib import Path
 
-import LS_MCPP
+from lsmcpp.solution import *
+from lsmcpp.local_search import *
+from lsmcpp.conflict_solver.low_level_planner import *
+from lsmcpp.conflict_solver.high_level_planner import PBS, Node
+from lsmcpp.benchmark.instance import MCPP
+from lsmcpp.benchmark.plan import *
+from lsmcpp.benchmark.simulation import simulate
 
-from MIP_MCPP.instance import Instance
-from MIP_MCPP.misc import colormap
+SEP_LITERAL = "="*50 + "\n"
+PLT_SHAPES = ['o', 'p', "X", "s", 'p', 'P',
+              '*', 'v', '^', '<', '>', '+', "x", "h"]
 
-from LS_MCPP.solution import *
-from LS_MCPP.local_search import *
-from conflict_solver.low_level_planner import *
-from conflict_solver.high_level_planner import PBS, Node
-from benchmark.instance import MCPP
-from benchmark.plan import *
-from benchmark.simulation import simulate
+colormap = lambda name='Accent': matplotlib.cm.get_cmap(name)
 
 
 def load_tracer(s):

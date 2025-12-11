@@ -8,7 +8,8 @@ This repository is the benchmark and implementation of the algorithms for the gr
 Please cite us if you use this code for the multi-robot coverage path planning problem.
 
 ## Installation
-`pip install -r requirements.txt`
+
+`pip install -e .`
 
 ## Usage
 ```bash
@@ -43,7 +44,7 @@ python main.py [-h] [--init_sol_type INIT_SOL_TYPE] [--prio_type PRIO_TYPE] [--M
   - reservation_table.py: the reservation table of time intervals (for safe-interval path planning)
   - states.py: state representations for the low-level planner
 - data[optinal]: the accompanying simulation exp results for the paper ([download link](https://drive.google.com/file/d/1P4infbS0uEnRhemXQyvgKJvTucT-lO92/view?usp=drive_link)).
-- LS_MCPP/
+- mcpp/
   - estc.py: the Extended STC algorithm
   - graph.py: class of the decomposed graph
   - local_search.py: the proposed local search framework for MCPP
@@ -55,6 +56,9 @@ python main.py [-h] [--init_sol_type INIT_SOL_TYPE] [--prio_type PRIO_TYPE] [--M
 - demo.ipynb: a demo code for a small MCPP instance
 - exp_runner.py: the experiment runner
 - plot.py: plot functions for the experiments
+
+## Benchmark dataset
+Please upzip data.zip to access the MCPP benchmark instances
 
 ## License
 LS-MCPP is released under the GPL version 3. See LICENSE.txt for further details.

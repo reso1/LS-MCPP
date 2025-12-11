@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import List, Tuple, Dict, Set
 from collections import defaultdict
 
-from benchmark.plan import Plan
+from lsmcpp.benchmark.plan import Plan
 
 
 class Interval:

@@ -1,5 +1,0 @@
-map: terrain_large
-root: [[32, 25]]
-weighted: True
-weight_seed: 0
-incomplete: False

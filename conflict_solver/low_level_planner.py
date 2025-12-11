@@ -5,13 +5,11 @@ from collections import defaultdict
 from enum import IntEnum
 import heapq, time
 
-import LS_MCPP
+from lsmcpp.benchmark.instance import MCPP
+from lsmcpp.benchmark.plan import State, Plan, Heading
 
-from benchmark.instance import MCPP
-from benchmark.plan import State, Plan, Heading
-
-from conflict_solver.reservation_table import ReservationTable, Interval
-from conflict_solver.states import SearchState, LabeledState
+from lsmcpp.conflict_solver.reservation_table import ReservationTable, Interval
+from lsmcpp.conflict_solver.states import SearchState, LabeledState
 
 
 class Status(IntEnum):

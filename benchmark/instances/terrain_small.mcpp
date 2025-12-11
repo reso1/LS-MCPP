@@ -1,5 +1,0 @@
-map: terrain_small
-root: [[10, 12], [12, 12], [12, 14], [10, 14], [8, 12], [8, 14], [8, 16], [10, 16]]
-weighted: True
-weight_seed: 0
-incomplete: False

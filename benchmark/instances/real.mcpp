@@ -1,7 +1,0 @@
-map: real
-root: [[5, 9], [0, 0]]
-weighted: True
-weight_seed: 0
-weight_range: [0.5, 1.0]
-weight_precision: 1 
-incomplete: False

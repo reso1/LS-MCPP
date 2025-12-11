@@ -12,9 +12,9 @@ import networkx as nx
 
 from matplotlib.colors import rgb2hex
 
-import LS_MCPP
+import mcpp
 
-from LS_MCPP.graph import DecGraph, contract, decomp
+from lsmcpp.graph import DecGraph, contract, decomp
 
 
 xy_sorted = lambda e: (e[0], e[1]) if e[0] < e[1] else (e[1], e[0])

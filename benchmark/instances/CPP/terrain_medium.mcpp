@@ -1,5 +1,0 @@
-map: terrain_medium
-root: [[5, 23]]
-weighted: True
-weight_seed: 0
-incomplete: False

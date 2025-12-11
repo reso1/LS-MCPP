@@ -5,16 +5,13 @@ import os
 import math
 import bisect
 
-import networkx as nx
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
-import LS_MCPP
-
-from benchmark.instance import MCPP
-from benchmark.plan import State, Plan, Heading
+from lsmcpp.benchmark.instance import MCPP
+from lsmcpp.benchmark.plan import State, Plan, Heading
 
 
 class Robot:

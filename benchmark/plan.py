@@ -3,7 +3,7 @@ from typing import List, Tuple, Dict, Set
 
 import math
 from enum import IntEnum
-from benchmark.instance import MCPP
+from lsmcpp.benchmark.instance import MCPP
 
 
 TURN_COST_RATIO = 0.5

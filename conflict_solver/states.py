@@ -1,6 +1,5 @@
-import LS_MCPP
-from benchmark.plan import State, Heading
-from conflict_solver.reservation_table import Interval
+from lsmcpp.benchmark.plan import State
+from lsmcpp.conflict_solver.reservation_table import Interval
 
 
 class SearchState(State):

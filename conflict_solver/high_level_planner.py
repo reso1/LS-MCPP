@@ -6,13 +6,11 @@ import psutil
 
 import networkx as nx
 
-import LS_MCPP
+import mcpp
 
-from LS_MCPP.utils import Helper, timeit
-from benchmark.instance import MCPP
-from benchmark.plan import TURN_COST_RATIO
-from LS_MCPP.solution import *
-from conflict_solver.low_level_planner import *
+from lsmcpp.utils import Helper
+from lsmcpp.solution import *
+from lsmcpp.conflict_solver.low_level_planner import *
 
 
 class Node:
@@ -150,7 +148,7 @@ class Node:
 
 class PBS:
 
-    def __init__(self, mcpp:MCPP, low_level_planner:LowlevelPlanner, 
+    def __init__(self, mcpp, low_level_planner:LowlevelPlanner, 
                  runtime_limit=float('inf'), num_max_nodes_explored_per_goal_limit=float('inf')) -> None:
         self.mcpp = mcpp
         self.planner = low_level_planner

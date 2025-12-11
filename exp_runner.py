@@ -1,19 +1,13 @@
 import os
 import argparse
-import matplotlib.pyplot as plt
 from pathlib import Path
 
-import LS_MCPP
-
-from MIP_MCPP.instance import Instance
-from MIP_MCPP.misc import colormap
-
-from LS_MCPP.solution import *
-from LS_MCPP.local_search import *
-from conflict_solver.low_level_planner import *
-from conflict_solver.high_level_planner import PBS, Node
-from benchmark.instance import MCPP
-from benchmark.plan import *
+from lsmcpp.solution import *
+from lsmcpp.local_search import *
+from lsmcpp.conflict_solver.low_level_planner import *
+from lsmcpp.conflict_solver.high_level_planner import PBS, Node
+from lsmcpp.benchmark.instance import MCPP
+from lsmcpp.benchmark.plan import *
 
 
 def run(name, num_rmv_ratios, num_seeds, runner, decmcpp_limit=None, methods=None, save=False):
