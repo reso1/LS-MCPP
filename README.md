@@ -12,7 +12,7 @@ Please cite us if you use this code for the multi-robot coverage path planning p
 `pip install .`
 
 ## Usage
-Please refer to `demo.ipynb`.
+Please refer to `demo.ipynb` and `demo_turn_min_mcpp.ipynb`.
 
 ## File Structure
 - benchmark/
@@ -42,7 +42,6 @@ Please refer to `demo.ipynb`.
 - turn_minimization/
   - interval.py: linear interval class
   - rectangle.py: 2d rectangle class
-  - TMC.py: multirobot-adapted implementation of Vandermeulen, Isaac, Roderich Groß, and Andreas Kolling. "Turn-minimizing multirobot coverage." ICRA'19.
   - TMSTCStar.py: implementaion of Lu, Junjie, et al. "TMSTC*: A path planning algorithm for minimizing turns in multi-robot coverage." RA-L'23
 - demo.ipynb: a demo code for a small MCPP instance
 - demo_turn_min_mcpp.ipynb: a demo code for turn-minimizing MCPP algorithms
