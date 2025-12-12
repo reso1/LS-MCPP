@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 color = ['r', 'm', 'b', 'k', 'c', 'g']
 
 
-class RTCPlanner:
+class RootedTreeCover:
     def __init__(self, G: nx.Graph, R, k, debug=False):
         self.G = G
         self.R = R
@@ -87,7 +87,10 @@ class RTCPlanner:
         self.__log(f'- Rooted-Tree-Cover, R={self.R}, B={B}')
 
         if nx.number_connected_components(self.G) != 1:
-            sys.exit(f'original graph is not connected piece')
+            import matplotlib.pyplot as plt
+            nx.draw(self.G, with_labels=True)
+            plt.show()
+            raise RuntimeError(f'original graph is not connected piece')
 
         # 1) remove all edges of weight greater than B
         del_count = 0
@@ -108,8 +111,7 @@ class RTCPlanner:
         # 2) MST of G by contracting roots in R to a single node uR
         contracted_G = nx.Graph(self.G)
         R_set = set(self.R)
-        uR = (sum([r[0] for r in self.R]) // self.k + 0.5,
-              sum([r[1] for r in self.R]) // self.k + 0.5)
+        uR = 'hyper_root'
         uR_edges = {}
         uR_edges_map = {}
         for r in self.R:

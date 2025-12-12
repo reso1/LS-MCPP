@@ -3,7 +3,6 @@ from typing import List, Generator
 from itertools import product
 
 import os
-import pickle
 from pathlib import Path
 import yaml
 
@@ -11,8 +10,6 @@ import numpy as np
 import networkx as nx
 
 from matplotlib.colors import rgb2hex
-
-import mcpp
 
 from lsmcpp.graph import DecGraph, contract, decomp
 
@@ -96,7 +93,7 @@ class MCPP:
         for rmv_ratio in all_rmv_ratios:
             for rand_seed in all_rand_seeds:
                 rng = np.random.RandomState(rand_seed)
-                fn = os.path.join("benchmark", "instances", self.name, f"{rmv_ratio:.3f}-{rand_seed}.mcpp")
+                fn = os.path.join("data", "instances", self.name, f"{rmv_ratio:.3f}-{rand_seed}.mcpp")
                 if os.path.exists(fn):
                     with open(fn, "r") as f:
                         instance = yaml.load(f, Loader=yaml.FullLoader)
@@ -136,7 +133,7 @@ class MCPP:
         weighted = bool(instance["weighted"])
         incomplete = bool(instance["incomplete"])
         G = nx.Graph()
-        with open(os.path.join("benchmark", "gridmaps", f"{instance['map']}.map"), "r") as f:
+        with open(os.path.join("data", "gridmaps", f"{instance['map']}.map"), "r") as f:
             lines = f.readlines()
             height = int(lines[1].strip().split(" ")[1])
             width = int(lines[2].strip().split(" ")[1])

@@ -1,15 +1,12 @@
 from __future__ import annotations
 from typing import List, Dict, Set, Tuple, Generator
-from itertools import combinations
-import heapq
 import psutil
 
+import numpy as np
 import networkx as nx
 
-import mcpp
-
 from lsmcpp.utils import Helper
-from lsmcpp.solution import *
+from lsmcpp.benchmark.solution import Solution
 from lsmcpp.conflict_solver.low_level_planner import *
 
 

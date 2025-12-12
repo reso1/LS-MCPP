@@ -3,8 +3,6 @@ from __future__ import annotations
 import time
 from typing import List, Tuple
 
-import mcpp
-
 import numpy as np
 from scipy.special import softmax
 
@@ -13,7 +11,7 @@ from lsmcpp.operator import Operator
 from lsmcpp.pool import *
 from lsmcpp.utils import DuplicationRec, Helper
 from lsmcpp.estc import ExtSTCPlanner
-from lsmcpp.solution import Solution
+from lsmcpp.benchmark.solution import Solution
 
 from lsmcpp.benchmark.instance import MCPP
 
@@ -145,7 +143,7 @@ class LocalSearchMCPP:
             record["sol_opt"] = sol_opt
 
         Pi = [ExtSTCPlanner.root_align(sol_opt.Pi[i], self.R_D[i]) for i in self.I]
-        sol_ret = Solution(Pi, np.array([Solution.path_cost(self.D, pi) for pi in Pi]))
+        sol_ret = Solution(Pi, np.array([Solution.path_cost(pi, self.D) for pi in Pi]))
         return sol_ret, runtime
 
     def _sample_separate(
@@ -307,7 +305,7 @@ class LocalSearchMCPP:
                         u_idx = Helper.shift(u_idx, 1, len_pi)
 
             sol.Pi[idx] = pi
-            sol.costs[idx] = Solution.path_cost(self.D, pi)
+            sol.costs[idx] = Solution.path_cost(pi, self.D)
 
         self.pools[1].init(sol)
         for pi_idx in np.argsort(sol.costs)[::-1]:

@@ -5,11 +5,6 @@ import itertools
 from typing import Tuple
 
 import networkx as nx
-import numpy as np
-
-from lsmcpp.stc_planner import STCPlanner
-
-from lsmcpp.utils import Helper
 
 
 class DecGraph:
@@ -183,15 +178,6 @@ def decomp(Tv:tuple) -> tuple:
 
 def undecomp(Dv:tuple) -> tuple:
     return (round(Dv[0]), round(Dv[1])) 
-
-
-def get_decomposed_graph_complete(T:nx.Graph) -> nx.Graph:
-    dummy_planner = STCPlanner(T)
-    D = dummy_planner.generate_decomposed_graph(T, None)
-    for v in D.nodes:
-        D.nodes[v]["terrain_weight"] = T.nodes[undecomp(v)]["terrain_weight"] / 4
-
-    return D
 
 
 def generate_G_prime(D: nx.Graph) -> Tuple[nx.Graph, dict]:

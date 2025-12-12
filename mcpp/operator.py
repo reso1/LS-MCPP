@@ -7,8 +7,8 @@ import networkx as nx
 
 from lsmcpp.estc import ExtSTCPlanner
 from lsmcpp.graph import DecGraph
-from lsmcpp.solution import Solution
-from lsmcpp.utils import DuplicationRec, Helper
+from lsmcpp.benchmark.solution import Solution
+from lsmcpp.utils import DuplicationRec
 
 
 class Operator:
@@ -53,7 +53,7 @@ class GrowOP(Operator):
             r_top, r_bot = r + ("top",), r + ("bot",)
             r = r_top if r_top in decgraph.T else r_bot
         pi = ExtSTCPlanner.plan(r, decgraph)
-        cost = Solution.path_cost(D, pi)
+        cost = Solution.path_cost(pi, D)
         new_tau = max(sol.tau, cost)
         new_sum_costs = sol.sum_costs - sol.costs[self.idx] + cost
 
@@ -90,7 +90,7 @@ class DedupOP(Operator):
                 r_top, r_bot = r + ("top",), r + ("bot",)
                 r = r_top if r_top in decgraph.T else r_bot
             pi = ExtSTCPlanner.plan(r, decgraph)
-            cost = Solution.path_cost(D, pi)
+            cost = Solution.path_cost(pi, D)
             new_tau = max(sol.tau, cost)
             new_sum_costs = sol.sum_costs - sol.costs[self.idx] + cost
 
@@ -144,8 +144,8 @@ class ExcOP(Operator):
                 r_rmv = r_top if r_top in decgraphs[self.op_rmv_idx].T else r_bot
             pi_add = ExtSTCPlanner.plan(r_grow, decgraphs[self.idx])
             pi_rmv = ExtSTCPlanner.plan(r_rmv, decgraphs[self.op_rmv_idx])
-            cost_add = Solution.path_cost(D, pi_add)
-            cost_rmv = Solution.path_cost(D, pi_rmv)
+            cost_add = Solution.path_cost(pi_add, D)
+            cost_rmv = Solution.path_cost(pi_rmv, D)
             new_tau = max(max(sol.tau, cost_add), cost_rmv)
             new_sum_costs = sol.sum_costs - sol.costs[self.idx] - sol.costs[self.op_rmv_idx] + cost_add + cost_rmv
 

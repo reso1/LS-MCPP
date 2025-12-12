@@ -14,7 +14,7 @@ from scipy.special import softmax
 
 from lsmcpp.graph import DecGraph
 from lsmcpp.operator import Operator, GrowOP, DedupOP, ExcOP
-from lsmcpp.solution import Solution
+from lsmcpp.benchmark.solution import Solution
 from lsmcpp.utils import DuplicationRec
 
 

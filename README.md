@@ -9,53 +9,43 @@ Please cite us if you use this code for the multi-robot coverage path planning p
 
 ## Installation
 
-`pip install -e .`
+`pip install .`
 
 ## Usage
-```bash
-python main.py [-h] [--init_sol_type INIT_SOL_TYPE] [--prio_type PRIO_TYPE] [--M M] [--S S] [--gamma GAMMA] [--tf TF] [--scale SCALE] [--write WRITE] [--verbose VERBOSE] istc
-```
-- Required:
-  - `istc`: the instance name stored in directory 'data/instances' or 'MIP-MCPP/data/instances'.
-- Optional:
-  - `--init_sol_type INIT_SOL_TYPE`: Initial solution type. Choose from {VOR, MFC, MSTCStar, MIP} (default=MFC)
-  - `-prio_type PRIO_TYPE`: Operator sampling type. Choose from {Heur, Rand} (default=Heur)
-  - `--M M`: Max iteration (default=3e3)
-  - `--S S`: Forced deduplication step size (default=100)
-  - `--gamma GAMMA`: Pool weight decaying factor (default=1e-2)
-  - `--tf TF`: The final temperature used to calculate the temperature decaying factor
-  - `--scale SCALE`: Plot scaling factor
-  - `--verbose VERBOSE`: Is verbose printing
-  - `--write WRITE`: Is writing the solution
-  - `--record RECORD`: Is recording the path costs of each iteration
-  - `--draw DRAW`: Is drawing the final solution
-  - `--random_remove RANDOM_REMOVE`: Is randomly making 20 percentage of terrain vertices incomplete
+Please refer to `demo.ipynb`.
 
 ## File Structure
 - benchmark/
-  - gridmaps: the 2d grid maps (partly from https://movingai.com/benchmarks/grids.html)
-  - instances: the MCPP instances with roots and weights specified
   - instance.py: the class of MCPP instance
-  - plans.py: the class of plan (trajectories) for the robots
+  - plan.py: the class of plan (trajectories) for the robots
   - simulation.py: a simple visualizer for MCPP execution animation
+  - solution.py: the class of the MCPP solution
 - conflict_solver/ 
   - high_level_planner.py: the high-level planner of priority-based search
   - low_level_planner.py: the chaining, holistic (multi-label), and adaptive approaches for the low-level planner
   - reservation_table.py: the reservation table of time intervals (for safe-interval path planning)
   - states.py: state representations for the low-level planner
-- data[optinal]: the accompanying simulation exp results for the paper ([download link](https://drive.google.com/file/d/1P4infbS0uEnRhemXQyvgKJvTucT-lO92/view?usp=drive_link)).
+- data[optinal]: 
+  - the accompanying simulation exp results for the paper ([download link](https://drive.google.com/file/d/1P4infbS0uEnRhemXQyvgKJvTucT-lO92/view?usp=drive_link)).
+  - gridmaps: the 2d grid maps (partly from https://movingai.com/benchmarks/grids.html)
+  - instances: the MCPP instances with roots and weights specified
 - mcpp/
+  - disjoint_set.py: disjoint set data structure
   - estc.py: the Extended STC algorithm
   - graph.py: class of the decomposed graph
   - local_search.py: the proposed local search framework for MCPP
   - operator.py: the three boundary editing operators
+  - planners.py: MCPP planner wrappers 
   - pool.py: class of operator pool
-  - solution.py: class of the MCPP solution
-  - utils.py: other ultility functions
-- MIP-MCPP: repo of the work "*[Mixed Integer Programming for Time-Optimal Multi-Robot Coverage Path Planning With Efficient Heuristics](https://arxiv.org/pdf/2306.17609)*"
+  - rooted_tree_cover.py: implmentation of Even, Guy, et al. "Min–max tree covers of graphs." OR-L'04
+  - utils.py: utility functions
+- turn_minimization/
+  - interval.py: linear interval class
+  - rectangle.py: 2d rectangle class
+  - TMC.py: multirobot-adapted implementation of Vandermeulen, Isaac, Roderich Groß, and Andreas Kolling. "Turn-minimizing multirobot coverage." ICRA'19.
+  - TMSTCStar.py: implementaion of Lu, Junjie, et al. "TMSTC*: A path planning algorithm for minimizing turns in multi-robot coverage." RA-L'23
 - demo.ipynb: a demo code for a small MCPP instance
-- exp_runner.py: the experiment runner
-- plot.py: plot functions for the experiments
+- demo_turn_min_mcpp.ipynb: a demo code for turn-minimizing MCPP algorithms
 
 ## Benchmark dataset
 Please upzip data.zip to access the MCPP benchmark instances
