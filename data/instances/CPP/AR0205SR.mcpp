@@ -1,0 +1,5 @@
+map: AR0205SR
+root: [[77, 72]]
+weighted: True
+weight_seed: 0
+incomplete: False

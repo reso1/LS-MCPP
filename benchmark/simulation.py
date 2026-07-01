@@ -94,7 +94,7 @@ def simulate(mcpp: MCPP, Pi: List[Plan], scale:float, dt:float, suffix:str=None)
             xs = xs_vec[i][:last_coord_idx+1] + [cur_state.pos[0]]
             ys = ys_vec[i][:last_coord_idx+1] + [cur_state.pos[1]]
             lines[i].set_data(xs, ys)
-            markers[i].set_data(cur_state.pos[0], cur_state.pos[1])
+            markers[i].set_data([cur_state.pos[0]], [cur_state.pos[1]])
             arrows[i].set_data(x = cur_state.pos[0], 
                                y = cur_state.pos[1], 
                                dx = 0.25*math.cos(cur_state.heading),

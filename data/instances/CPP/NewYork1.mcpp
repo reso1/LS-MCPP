@@ -1,0 +1,5 @@
+map: NewYork1
+root: [[0, 8]]
+weighted: True
+weight_seed: 0
+incomplete: False

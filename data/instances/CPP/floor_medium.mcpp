@@ -1,0 +1,4 @@
+map: floor_medium
+root: [[6, 9]]
+weighted: False
+incomplete: False

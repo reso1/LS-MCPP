@@ -17,7 +17,7 @@ setup(
     install_requires=[
         "matplotlib",
         "networkx",
-        "numpy",
+        "numpy<2",
         "PyYAML",
         "scipy",
         "gurobipy"

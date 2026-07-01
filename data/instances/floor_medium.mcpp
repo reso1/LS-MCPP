@@ -1,0 +1,4 @@
+map: floor_medium
+root: [[6, 9], [7, 29], [28, 2], [3, 21], [7, 36], [20, 31], [13, 6], [32, 17]]
+weighted: False
+incomplete: False

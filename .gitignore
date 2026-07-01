@@ -4,4 +4,3 @@
 test*
 *.egg-info
 build*
-data/*
