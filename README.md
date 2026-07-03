@@ -46,8 +46,5 @@ Please refer to `demo.ipynb` and `demo_turn_min_mcpp.ipynb`.
 - demo.ipynb: a demo code for a small MCPP instance
 - demo_turn_min_mcpp.ipynb: a demo code for turn-minimizing MCPP algorithms
 
-## Benchmark dataset
-Please upzip data.zip to access the MCPP benchmark instances
-
 ## License
 LS-MCPP is released under the GPL version 3. See LICENSE.txt for further details.
