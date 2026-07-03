@@ -1,11 +1,9 @@
 # LS-MCPP
 This repository is the benchmark and implementation of the algorithms for the graph-based multi-robot coverage path planning problem from the following two papers:
 
-- Branch master: *Jingtao Tang, Zining Mao, and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning on Grids with Path Deconfliction." T-RO (to appear). [[paper]](https://arxiv.org/abs/2411.01707), [[project]](https://sites.google.com/view/lsmcpp)
+- Branch master: *Jingtao Tang, Zining Mao, and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning on Grids with Path Deconfliction." T-RO. [[paper]](https://arxiv.org/abs/2411.01707), [[project]](https://sites.google.com/view/lsmcpp)
 
 - Branch aaai24: *Jingtao Tang and Hang Ma. "Large-Scale Multi-Robot Coverage Path Planning via Local Search." AAAI 2024. [[paper]](https://arxiv.org/pdf/2312.10797.pdf), [[simulation]](https://vimeo.com/894744842)*, [[project]](https://reso1.github.io/blog/posts/grid_mcpp)
-
-Please cite us if you use this code for the multi-robot coverage path planning problem.
 
 ## Installation
 
@@ -45,6 +43,31 @@ Please refer to `demo.ipynb` and `demo_turn_min_mcpp.ipynb`.
   - TMSTCStar.py: implementaion of Lu, Junjie, et al. "TMSTC*: A path planning algorithm for minimizing turns in multi-robot coverage." RA-L'23
 - demo.ipynb: a demo code for a small MCPP instance
 - demo_turn_min_mcpp.ipynb: a demo code for turn-minimizing MCPP algorithms
+
+## BibTex Citations
+Large-Scale Multi-Robot Coverage Path Planning on Grids with Path Deconfliction:
+```bibtex
+@ARTICLE{tang2025large,
+  author={Tang, Jingtao and Mao, Zining and Ma, Hang},
+  journal={IEEE Transactions on Robotics}, 
+  title={Large-Scale Multirobot Coverage Path Planning on Grids With Path Deconfliction}, 
+  year={2025},
+  volume={41},
+  pages={3348-3367},
+  doi={10.1109/TRO.2025.3567476}}
+```
+Large-Scale Multi-Robot Coverage Path Planning via Local Search:
+```bibtex
+@inproceedings{tang2024large,
+  title={Large-scale multi-robot coverage path planning via local search},
+  author={Tang, Jingtao and Ma, Hang},
+  booktitle={Proceedings of the AAAI conference on artificial intelligence},
+  volume={38},
+  number={16},
+  pages={17567--17574},
+  year={2024}
+}
+```
 
 ## License
 LS-MCPP is released under the GPL version 3. See LICENSE.txt for further details.
