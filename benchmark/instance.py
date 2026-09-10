@@ -10,6 +10,7 @@ import numpy as np
 import networkx as nx
 
 from matplotlib.colors import rgb2hex
+from matplotlib.collections import PolyCollection
 
 from lsmcpp.graph import DecGraph, contract, decomp
 
@@ -49,11 +50,9 @@ class MCPP:
 
         for r in self.R:
             r = self.legacy_vertex(r)
-            ax.plot(r[0], r[1], "*k", ms=8*scale, mfc=color, alpha=alpha)
+            ax.plot(r[0], r[1], "*k", ms=8*scale, mfc=color, alpha=alpha, zorder=3)
 
-        for v in self.static_obstacles:
-            px, py = (v[0] - 0.5) / 2, (v[1] - 0.5) / 2
-            ax.plot(px, py, "ks", ms=8*scale, alpha=alpha)
+        self.draw_obstacles(ax, alpha=alpha)
         
         ax.axis("equal")
         # ax.set_xlim(-1, self.width+1)
@@ -61,6 +60,13 @@ class MCPP:
         ax.set_xlabel("")
         ax.set_ylabel("")
         # ax.axis("off")
+
+    def draw_obstacles(self, ax, alpha=1) -> None:
+        """Draw grid cells in legacy coordinates so their size follows the map."""
+        centers = (np.asarray(self.static_obstacles).reshape(-1, 1, 2) - 0.5) / 2
+        corners = np.array([[-0.25, -0.25], [0.25, -0.25], [0.25, 0.25], [-0.25, 0.25]])
+        ax.add_collection(PolyCollection(
+            centers + corners, facecolors="k", edgecolors="none", alpha=alpha))
 
     def random_removal(self, percentage:float, seed:int) -> MCPP:
         rng = np.random.RandomState(seed)
