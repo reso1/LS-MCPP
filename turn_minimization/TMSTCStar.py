@@ -2,11 +2,14 @@ from __future__ import annotations
 from typing import List, Tuple, Set, Dict
 from itertools import combinations, product
 from collections import defaultdict
+from dataclasses import dataclass
+from math import hypot, isfinite, pi, sqrt
 
 import numpy as np
 import networkx as nx
 
 from lsmcpp.benchmark.solution import Solution
+from lsmcpp.benchmark.plan import Heading
 from lsmcpp.estc import ExtSTCPlanner
 from lsmcpp.planners import MSTCStarPlanner
 from lsmcpp.benchmark.instance import MCPP
@@ -16,6 +19,41 @@ from lsmcpp.turn_minimization.rectangle import Rectangle, HORIZONTAL, VERTICAL
 
 
 edge_key = lambda ra, rb: (ra, rb) if ra.lowerleft < rb.lowerleft else (rb, ra)
+
+
+@dataclass(frozen=True)
+class TMSTCStarCost:
+
+    tool_width: float = 0.5
+    v_max: float = 0.5
+    omega: float = 0.8
+    a: float = 0.6
+
+    def __post_init__(self):
+        for name in ("tool_width", "v_max", "omega", "a"):
+            if not isfinite(getattr(self, name)) or getattr(self, name) <= 0:
+                raise ValueError(f"{name} must be finite and positive")
+
+    def _straight_time(self, distance: float) -> float:
+        if distance <= self.v_max ** 2 / self.a:
+            # Reproduce the printed equation, including its short-run branch.
+            return sqrt(distance / self.a)
+        return distance / self.v_max + self.v_max / self.a
+
+    def path_cost(self, path: list) -> float:
+        """Return T_i in seconds for a path in legacy coordinates."""
+        cost, distance, last_heading = 0.0, 0.0, None
+        for u, v in zip(path, path[1:]):
+            if u == v:
+                continue
+            heading = Heading.get(u, v)
+            if last_heading is not None and heading != last_heading:
+                turns = abs(heading - last_heading)
+                cost += self._straight_time(distance) + min(turns, 4 - turns) * pi / (2 * self.omega)
+                distance = 0.0
+            distance += hypot(v[0] - u[0], v[1] - u[1]) * 2 * self.tool_width
+            last_heading = heading
+        return cost + self._straight_time(distance)
 
 
 def compute_bipartite_graph(dg:DecGraph) -> Tuple[nx.DiGraph, nx.Graph]:
@@ -192,7 +230,12 @@ def generate_spanning_tree(B:List[Rectangle]) -> nx.Graph:
     return tree
 
 
-def TMSTCStar_planner(mcpp:MCPP) -> Solution:
+def TMSTCStar_planner(
+    mcpp:MCPP, *, tool_width:float=0.5, v_max:float=0.5,
+    omega:float=0.8, a:float=0.6,
+) -> Solution:
+    """Balance T_i from Eq. (10); robot parameters default to Table I."""
+    cost_model = TMSTCStarCost(tool_width=tool_width, v_max=v_max, omega=omega, a=a)
     dg = contract(mcpp._G_legacy)
     I, G = compute_bipartite_graph(dg)
  
@@ -203,13 +246,15 @@ def TMSTCStar_planner(mcpp:MCPP) -> Solution:
     R_D = [mcpp.legacy_vertex(r) for r in mcpp.R]
 
     # replace the initial STC path with by the one using the generated spanning tree
-    planner = MSTCStarPlanner(dg.T, mcpp.k, R, R_D, float('inf'), dg, True)
+    planner = MSTCStarPlanner(
+        dg.T, mcpp.k, R, R_D, float('inf'), dg, True,
+        path_cost=cost_model.path_cost,
+    )
     pi = ExtSTCPlanner.full_stc(R[0], T, dg.dV)
     planner.rho = ExtSTCPlanner.parallel_rewiring(pi, dg.D)
 
     plans = planner.allocate()
-    paths, _ = planner.simulate(plans, False)
+    paths, costs = planner.simulate(plans, False)
 
-    costs = [Solution.path_cost(pi[1:-1], dg.D) for pi in paths]
     return Solution([pi[1:-1] for pi in paths], np.array(costs))
 

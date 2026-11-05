@@ -63,13 +63,15 @@ class MSTCStarPlanner:
 
     """ rewrite to support incomplete terrain verts """
 
-    def __init__(self, G:nx.Graph, k, R, R_D, cap, dg:DecGraph, cut_off_opt=True):
+    def __init__(self, G:nx.Graph, k, R, R_D, cap, dg:DecGraph, cut_off_opt=True, path_cost=None):
         self.G = G
         self.k = k
         self.R = R
         self.R_D_map = {R[i]:R_D[i] for i in range(k)}
         self.capacity = cap
         self.H = dg.D
+        # Evaluate complete cell paths, including depot travel, for every cut.
+        self.path_cost = path_cost if path_cost is not None else lambda pi: Solution.path_cost(pi, self.H)
         self.rho = ExtSTCPlanner.plan(R[0], dg)
         self.cut_off_opt = cut_off_opt
 
@@ -191,7 +193,7 @@ class MSTCStarPlanner:
         if path[-1] != depot:
             path.extend(shortest_path_with_turn_cost(self.H, path[-1], depot_small)[1:] + [depot])
 
-        return path, Solution.path_cost(path[1:-1], self.H)
+        return path, self.path_cost(path[1:-1])
 
     def __find_optimial_cut(self, r_index, weights, plans, debug=True):
         """ find optimal-cut point of U{P_cutoff_index} using binary search """
